@@ -23,8 +23,14 @@ public class LoginService {
     BCryptPasswordEncoder bCryptPasswordEncoder;
 
     public Login getLoginDetails(String header) {
-        Login logindetails = null;
-        if (header != null && header.startsWith("Basic")) {
+
+
+        String userNameFromUser = null;
+        String passFromUser = null;
+
+        Login logindetails = new Login();
+//        if (header != null && header.startsWith("Basic")) {
+
 
             // get the encoded string
             String encodedHeader = header.substring("Basic ".length()).trim();
@@ -33,12 +39,26 @@ public class LoginService {
             String decodeString = new String(Base64.getDecoder().decode(encodedHeader), StandardCharsets.UTF_8);
             //set username and password after decryption
             String[] splitDecodeString = decodeString.split(":");
-            System.out.println(decodeString);
+
+//            System.out.println(decodeString);
             String userName = splitDecodeString[0];
             String passwordFrom = splitDecodeString[1];
-            logindetails.setUserName(userName);
-            logindetails.setPassword(passwordFrom);
-        }
+//            logindetails.setUserName(userName);
+//            logindetails.setPassword(passwordFrom);
+//            System.out.println(logindetails.getUserName());
+//            System.out.println(logindetails.getPassword());
+
+            String[] splitCredentials = decodeString.split(":", 2);
+            userNameFromUser = splitCredentials[0];
+            passFromUser = splitCredentials[1];
+//            System.out.println("UserName in Loginservice: " + userNameFromUser);
+//            System.out.println("Password in Loginservice: " + passFromUser);
+
+            logindetails.setUserName(userNameFromUser);
+            logindetails.setPassword(passFromUser);
+
+//        }
+
         return logindetails;
     }
 

@@ -2,6 +2,8 @@ package neu.edu.webapp.Service;
 
 import neu.edu.webapp.DAO.RegisterAccountDAO;
 import neu.edu.webapp.Model.Account;
+import neu.edu.webapp.Validater.EmailValidator;
+
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,9 +18,19 @@ import java.io.IOException;
 @Component
 public class RegisterAccountFromCSV {
     @Autowired
-    private Account acc;
+
+    Account acc;
     @Autowired
-    private RegisterAccountDAO registerAccountDAO;
+    RegisterAccountDAO registerAccountDAO;
+
+    @Autowired
+    LoginService loginService;
+
+    @Autowired
+    EmailValidator emailValidator;
+
+
+
 
     public void saveDataFromCSV(String csvFilePath) throws IOException {
         try (BufferedReader line_reader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -27,16 +39,21 @@ public class RegisterAccountFromCSV {
                 records.forEach(record -> {
                     String passwordFromCSV = record.get("password");
 
+                    String encryptPassword = loginService.PasswordHashing(passwordFromCSV);
+
+
                     //getting details of each record and saving it in Acc object
                 acc.setFirst_name(record.get("first_name"));
                 acc.setLast_name(record.get("last_name"));
                 acc.setEmail(record.get("email"));
-                acc.setPassword(passwordFromCSV);
+
+                acc.setPassword(encryptPassword);
 
                 //check if the email already exists in
-//                    String email_Id = acc.getEmail();
+                    String email_Id = acc.getEmail();
 
-                    if(!registerAccountDAO.checkEmailIfAlreadyExists(acc)){
+                    if(!registerAccountDAO.checkEmailIfAlreadyExists(acc) && emailValidator.validate(email_Id)){
+
                         registerAccountDAO.saveAccountToDB(acc);
                     }
 
