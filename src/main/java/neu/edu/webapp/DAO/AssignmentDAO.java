@@ -145,6 +145,22 @@ public class AssignmentDAO extends DAO {
         return true;
 
     }
+
+    public Assignment getAssignmentFromIdWithoutAcc(String assignmentId){
+        Assignment assignment1 = null;
+        try{
+            begin();
+            Query query = getSession().createQuery("from Assignment where id=:assignId");
+            query.setParameter("assignId",assignmentId);
+            assignment1 = (Assignment) query.uniqueResult();
+            commit();
+        }catch(Exception e){
+            System.out.println("Exception in AssDAO in getAssByID  " + e.getMessage());
+        }finally{
+            close();
+        }
+        return assignment1;
+    }
 }
 
 

@@ -93,6 +93,15 @@ public class AssignmentController {
                 Account account = assignmentService.fetchUserAccount(login.getUserName());
                 String accountId = account.getId();
 
+                //if the assignment doesn't belong to username
+
+                //get account details from assignmentId => assignment.getAccountId();
+                Assignment assignment3 = assignmentService.getAssignmentFromIdWithoutAccountID(assignmentId);
+                String usernameOfAssignment = assignment3.getAccountId().getEmail();
+                if(!usernameOfAssignment.equals(login.getUserName())){
+//                    System.out.println(usernameOfAssignment + "   :   "+ login.getUserName());
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).cacheControl(CacheControl.noCache()).build();
+                }
                 assignment = assignmentService.getAssignmentbyId(assignmentId, account);
 
                 if (assignment == null) {
@@ -120,7 +129,15 @@ public class AssignmentController {
                 Account account = assignmentService.fetchUserAccount(login.getUserName());
 
                 assignmentbyId = assignmentService.deleteAssignmentbyId(assignmentId, account);
+                //if the assignment doesn't belong to username
 
+                //get account details from assignmentId => assignment.getAccountId();
+                Assignment assignment3 = assignmentService.getAssignmentFromIdWithoutAccountID(assignmentId);
+                String usernameOfAssignment = assignment3.getAccountId().getEmail();
+                if(!usernameOfAssignment.equals(login.getUserName())){
+//                    System.out.println(usernameOfAssignment + "   :   "+ login.getUserName());
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).cacheControl(CacheControl.noCache()).build();
+                }
                 if (!assignmentbyId)
                     return ResponseEntity.status(HttpStatus.NOT_FOUND).cacheControl(CacheControl.noCache()).build();
 
@@ -144,6 +161,16 @@ public class AssignmentController {
 
             if (loginService.checkValidUser(login)) {
                 Account account = assignmentService.fetchUserAccount(login.getUserName());
+
+                //if the assignment doesn't belong to username
+
+                //get account details from assignmentId => assignment.getAccountId();
+                Assignment assignment3 = assignmentService.getAssignmentFromIdWithoutAccountID(assignmentId);
+                String usernameOfAssignment = assignment3.getAccountId().getEmail();
+                if(!usernameOfAssignment.equals(login.getUserName())){
+//                    System.out.println(usernameOfAssignment + "   :   "+ login.getUserName());
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).cacheControl(CacheControl.noCache()).build();
+                }
                 if (assignmentService.updateAssignment(assignmentId, assignment, account)) {
                     System.out.println("Update success");
                 } else {

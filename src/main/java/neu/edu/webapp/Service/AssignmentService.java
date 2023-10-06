@@ -67,4 +67,8 @@ public class AssignmentService {
         return account;
 
     }
+
+    public Assignment getAssignmentFromIdWithoutAccountID(String assignmentID){
+        return assignmentDAO.getAssignmentFromIdWithoutAcc(assignmentID);
+    }
 }

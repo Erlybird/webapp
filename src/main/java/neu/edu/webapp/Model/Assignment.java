@@ -34,10 +34,10 @@ public class Assignment {
     @Column(nullable = false)
     private Date deadline;
     @CreationTimestamp
-    @Column(updatable = false, nullable = false,insertable = false)
+    @Column(updatable = false, nullable = false)
     private Date assignment_created;
     @CreationTimestamp
-    @Column(nullable = false,insertable = false)
+    @Column(nullable = false)
     private Date assignment_updated;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accountId", referencedColumnName = "id")
