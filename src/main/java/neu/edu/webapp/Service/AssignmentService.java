@@ -33,7 +33,9 @@ public class AssignmentService {
         String name = ass.getName();
         int points = ass.getPoints();
         int attempts = ass.getNum_of_attemps();
-        if (!name.isEmpty() && points >= 1 && points <= 100 && attempts >= 1 && attempts <= 100) {
+        //validation for Name ,points and attempts
+        if ( name != null && !name.isEmpty() &&
+                points >= 1 && points <= 100 && attempts >= 1 && attempts <= 100) {
             return false;
         }
         return true;

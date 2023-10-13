@@ -27,7 +27,7 @@ public class AssignmentController {
     LoginService loginService;
 
     @PostMapping(value = "/v1/assignments")
-    public ResponseEntity<Void> addAssignments(@RequestHeader("Authorization") String authHeader, @RequestBody Assignment ass) {
+    public ResponseEntity<?> addAssignments(@RequestHeader("Authorization") String authHeader, @RequestBody Assignment ass) {
 
         Login login = loginService.getLoginDetails(authHeader);
         boolean isLoginSuccess = loginService.checkValidUser(login);
@@ -54,7 +54,7 @@ public class AssignmentController {
             //login credentials wrong
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).cacheControl(CacheControl.noCache()).build();
         }
-        return ResponseEntity.status(HttpStatus.CREATED).cacheControl(CacheControl.noCache()).body(null);
+        return ResponseEntity.status(HttpStatus.CREATED).cacheControl(CacheControl.noCache()).body(ass);
     }
 
     @GetMapping(value = "v1/assignments")
@@ -154,7 +154,7 @@ public class AssignmentController {
     }
 
     @PutMapping(value = "/v1/assignments/{id}")
-    public ResponseEntity<Void> updateAssignmentByID(@RequestHeader("Authorization") String authHeader, @RequestBody Assignment assignment,
+    public ResponseEntity<?> updateAssignmentByID(@RequestHeader("Authorization") String authHeader, @RequestBody Assignment assignment,
                                                      @PathVariable(value = "id") String assignmentId) {
         try {
             Login login = loginService.getLoginDetails(authHeader);
@@ -171,6 +171,9 @@ public class AssignmentController {
 //                    System.out.println(usernameOfAssignment + "   :   "+ login.getUserName());
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).cacheControl(CacheControl.noCache()).build();
                 }
+                if (assignmentService.isInvalidPayload(assignment)) {
+                    return ResponseEntity.status(HttpStatus.BAD_REQUEST).cacheControl(CacheControl.noCache()).build();
+                }
                 if (assignmentService.updateAssignment(assignmentId, assignment, account)) {
                     System.out.println("Update success");
                 } else {
@@ -186,7 +189,7 @@ public class AssignmentController {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return ResponseEntity.status(HttpStatus.NO_CONTENT).cacheControl(CacheControl.noCache()).build();
+        return ResponseEntity.status(HttpStatus.NO_CONTENT).cacheControl(CacheControl.noCache()).body(assignment);
 
     }
 }

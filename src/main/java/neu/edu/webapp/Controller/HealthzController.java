@@ -15,9 +15,9 @@ public class HealthzController {
     @GetMapping("/healthz")
     public ResponseEntity<Void> checkDatabaseConnection(@RequestParam(name = "inputParam", required = false) String inputParam, @RequestBody(required = false) String inputData) {
         boolean isDbUp = connectionCheckService.isDatabaseConnected();
-        System.out.println("I'm in IN");
+//        System.out.println("I'm in IN");
         if (isDbUp) {
-            if (inputParam != null) {
+            if (inputParam != null && !inputParam.isEmpty()) {
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).cacheControl(CacheControl.noCache()).build(); // returns 400 Bad Request
             }
             if (inputData != null && !inputData.isEmpty()) {

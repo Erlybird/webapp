@@ -1,5 +1,6 @@
 package neu.edu.webapp.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import org.hibernate.annotations.CreationTimestamp;
@@ -99,7 +100,7 @@ public class Assignment {
     public void setAssignment_updated(Date assignment_updated) {
         this.assignment_updated = assignment_updated;
     }
-
+    @JsonIgnore
     public Account getAccountId() {
         return accountId;
     }
