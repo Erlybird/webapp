@@ -130,6 +130,8 @@ public class AssignmentController {
 
                 assignmentbyId = assignmentService.deleteAssignmentbyId(assignmentId, account);
                 //if the assignment doesn't belong to username
+                if (!assignmentbyId)
+                    return ResponseEntity.status(HttpStatus.NOT_FOUND).cacheControl(CacheControl.noCache()).build();
 
                 //get account details from assignmentId => assignment.getAccountId();
                 Assignment assignment3 = assignmentService.getAssignmentFromIdWithoutAccountID(assignmentId);
@@ -138,8 +140,6 @@ public class AssignmentController {
 //                    System.out.println(usernameOfAssignment + "   :   "+ login.getUserName());
                     return ResponseEntity.status(HttpStatus.FORBIDDEN).cacheControl(CacheControl.noCache()).build();
                 }
-                if (!assignmentbyId)
-                    return ResponseEntity.status(HttpStatus.NOT_FOUND).cacheControl(CacheControl.noCache()).build();
 
             } else {
                 //invalid username and password
