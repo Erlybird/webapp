@@ -66,9 +66,5 @@ class WebappApplicationTests {
         // Assert that the response status code is 200 OK
         assertEquals(200, responseEntity.getStatusCodeValue());
 
-
-
     }
-}
-
 }
