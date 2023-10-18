@@ -103,7 +103,10 @@ jobs:
         run: packer init ./packer/aws-debian.pkr.hcl
 
       - name: Build AMI
-        run: packer build ./packer/aws-debian.pkr.hcl
+        run: |
+          mvn clean package
+          cp ./target/*.jar packer
+          packer build ./packer/aws-debian.pkr.hcl
 
 
 
