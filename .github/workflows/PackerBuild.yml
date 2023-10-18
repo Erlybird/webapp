@@ -81,7 +81,7 @@ jobs:
         with:
           command: build
           working_directory: ${{ github.workspace }}
-          target: ami.pkr.hcl
+          target: aws-debian.pkr.hcl
 
         env:
           AWS_ACCESS_KEY_ID: "AKIA5MTCQPM5AQ45WECR"
