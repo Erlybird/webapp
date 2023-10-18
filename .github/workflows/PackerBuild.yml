@@ -44,7 +44,7 @@ jobs:
       - name: Build with Maven
         run: |
           mvn clean package
-          mkdir stage && cp target/demo-0.0.1-SNAPSHOT.jar stage
+          mkdir stage && cp target/webapp-0.0.1-SNAPSHOT.jar stage
           cp stage/*.jar ami
           cd ami && ls -all
           
@@ -54,7 +54,7 @@ jobs:
           version: 1.6.5
 
       - name: Run `packer init`
-        run: "packer init ./aws-debian.pkr.hcl"
+        run: packer init ./aws-debian.pkr.hcl
 
 
         env:
@@ -63,7 +63,7 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
 
       - name: Packer-build
-        run: "packer build ./aws-debian.pkr.hcl"
+        run: packer build -var "artifact = ami/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
 
 
 
