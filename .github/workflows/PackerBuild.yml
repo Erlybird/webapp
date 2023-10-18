@@ -58,8 +58,8 @@ jobs:
 
 
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: "AKIA5MTCQPM5AQ45WECR"
+          AWS_SECRET_ACCESS_KEY: "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"
           AWS_DEFAULT_REGION: us-east-1
 
       - name: Packer-build
