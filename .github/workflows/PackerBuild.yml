@@ -48,27 +48,27 @@ jobs:
       - name: Check jar file created or not
         run: cd ${{ github.workspace }}/target/ && ls -al
         
-      - name: Copying the file to ami repository
-        run: cp ${{ github.workspace }}/target/webapp-0.0.1-SNAPSHOT.jar ${{ github.workspace }}/ami/
+      - name: Copying the file to packer repository
+        run: cp ${{ github.workspace }}/target/webapp-0.0.1-SNAPSHOT.jar ${{ github.workspace }}/packer/
 
-      - name: Switch to ami folder
-        run: cd ami && ls -al
+      - name: Switch to packer folder
+        run: cd packer && ls -al
 
-      - name: Save the ami folder with jar file to artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: ami
-          path: ${{ github.workspace }}/ami
+#      - name: Save the ami folder with jar file to artifact
+#        uses: actions/upload-artifact@v1
+#        with:
+#          name: ami
+#          path: ${{ github.workspace }}/ami
 
-  ami_build_Packer:
-    runs-on: ubuntu-latest
-    needs: jar_creation
+#  ami_build_Packer:
+#    runs-on: ubuntu-latest
+#    needs: jar_creation
         
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/download-artifact@v2
-        with:
-          name: ami
+#    steps:
+#     - uses: actions/checkout@v2
+#      - uses: actions/download-artifact@v2
+#        with:
+#          name: ami
 
 
       - name: Setup `packer`
