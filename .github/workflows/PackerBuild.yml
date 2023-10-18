@@ -48,7 +48,7 @@ jobs:
       - name: Check jar file created or not
         run: cd ${{ github.workspace }}/target/ && ls -al
         
-      - name: Copying the file to ami repository and then to
+      - name: Copying the file to ami repository
         run: cp ${{ github.workspace }}/target/webapp-0.0.1-SNAPSHOT.jar ${{ github.workspace }}/ami/
 
       - name: Switch to ami folder
@@ -101,10 +101,11 @@ jobs:
       - name: Run Packer init
         id: init
         run: |
-          packer init packer/aws-debian.pkr.hcl
+          packer init /packer/aws-debian.pkr.hcl
 
       - name: Build AMI
-        run: packer build packer/aws-debian.pkr.hcl
+        run: packer build /packer/aws-debian.pkr.hcl
+
 
 
 
