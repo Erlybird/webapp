@@ -63,7 +63,7 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
 
       - name: Packer-build
-        run: packer build -var "artifact = ami/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
+        run: packer build ./aws-debian.pkr.hcl
 
 
 
