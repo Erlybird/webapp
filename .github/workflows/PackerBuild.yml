@@ -87,9 +87,11 @@ jobs:
           AWS_SOURCE_AMI: "ami-06db4d78cb1d3bbf9"
           AWS_SUBNET_ID: "subnet-0185a07b279bcab12"
           AWS_SSH_USERNAME: "admin"
-          AMI_USERS:
-           - "455958282906"
-           - "920403344186"
+
+#          AMI_USERS:
+#           - "455958282906"
+#           - "920403344186"
+
           AWS_VPC_ID: "vpc-06561666a2aecb4ee"
 
       - name: Packer-build
