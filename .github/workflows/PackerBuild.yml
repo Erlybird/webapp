@@ -46,13 +46,13 @@ jobs:
         run:  mvn clean && mvn package
 
       - name: Check jar file created or not
-        run: ls -la && cd webapp && cd target && ls -la
+        run: cd ${{ github.workspace }}/target/ && ls -al
         
       - name: Copying the file to ami repository and then to
-        run: cp webapp/target/webapp-0.0.1-SNAPSHOT.jar webapp/ami/
+        run: cp ${{ github.workspace }}/target/webapp-0.0.1-SNAPSHOT.jar ${{ github.workspace }}/ami/
 
       - name: Switch to ami folder
-        run: cd ami && ls -all
+        run: cd ami && ls -al
 
       - name: Save the ami folder with jar file to artifact
         uses: actions/upload-artifact@v1
@@ -65,7 +65,7 @@ jobs:
     needs: jar_creation
         
     steps:
-      - uses: actions/checkout@v2
+#      - uses: actions/checkout@v2
       - uses: actions/download-artifact@v2
         with:
           name: ami

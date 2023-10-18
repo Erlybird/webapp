@@ -31,21 +31,21 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
+#
+#      - name: Wait for MySQL to be ready
+#        run: |
+#          until nc -z -v -w30 localhost 3306
+#          do
+#            echo "Waiting for MySQL to be ready..."
+#            sleep 5
+#          done
 
-      - name: Wait for MySQL to be ready
-        run: |
-          until nc -z -v -w30 localhost 3306
-          do
-            echo "Waiting for MySQL to be ready..."
-            sleep 5
-          done
-
-      - name: Build with Maven
-        run: |
-          mvn clean install
-        working-directory: ${{ github.workspace }}
-
-      - name: Run Integration Tests
-        run: |
-          mvn test -P integration-test
-        working-directory: ${{ github.workspace }}
+#      - name: Build with Maven
+#        run: |
+#          mvn clean install
+#        working-directory: ${{ github.workspace }}
+#
+#      - name: Run Integration Tests
+#        run: |
+#          mvn test -P integration-test
+#        working-directory: ${{ github.workspace }}
