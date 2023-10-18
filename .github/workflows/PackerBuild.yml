@@ -77,11 +77,10 @@ jobs:
           version: 1.6.5
 
       - name: Packer AMI Build
-        uses: hashicorp/packer-github-actions@master
+        uses: ExitoLab/packer_build_action_aws@v0.2.10
         with:
-          command: build
-          working_directory: ${{ github.workspace }}
-          target: aws-debian.pkr.hcl
+          templateFile: 'aws-debian.pkr.hcl'
+          workingDir: ${{ github.workspace }}
 
         env:
           AWS_ACCESS_KEY_ID: "AKIA5MTCQPM5AQ45WECR"
