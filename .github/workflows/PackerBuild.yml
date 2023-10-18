@@ -76,9 +76,12 @@ jobs:
         with:
           version: 1.6.5
 
-      - name: Run `packer init`
-        run: packer init ./aws-debian.pkr.hcl
-
+      - name: Packer AMI Build
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          working_directory: ${{ github.workspace }}
+          target: ami.pkr.hcl
 
         env:
           AWS_ACCESS_KEY_ID: "AKIA5MTCQPM5AQ45WECR"
@@ -93,9 +96,9 @@ jobs:
 #           - "920403344186"
 
           AWS_VPC_ID: "vpc-06561666a2aecb4ee"
-
-      - name: Packer-build
-        run: packer build ./aws-debian.pkr.hcl
+#
+#      - name: Packer-build
+#        run: packer build ./aws-debian.pkr.hcl
 
 
 
