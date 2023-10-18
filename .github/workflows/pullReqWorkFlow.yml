@@ -4,6 +4,9 @@ on:
   pull_request:
     branches:
       [ main ]
+  push:
+    branches:
+      [ main ]
 
 jobs:
   integration-test:
@@ -13,7 +16,6 @@ jobs:
       mysql:
         image: mysql:latest
         env:
-#          MYSQL_ROOT_USERNAME: root
           MYSQL_ROOT_PASSWORD: Ssangramm@12
           MYSQL_DATABASE: cloud
         ports:
@@ -29,34 +31,6 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
-#
-#      - name: Install MySQL
-#        run: |
-#            sudo apt-get update
-#            sudo apt-get install mysql-server -y
-#            sudo service mysql start
-#            sudo mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH 'mysql_native_password' BY 'your_password';"
-#            sudo mysql -e "FLUSH PRIVILEGES;"
-#          env:
-#            MYSQL_ROOT_PASSWORD: Ssangramm@12
-
-#      - name: Test MySQL
-#        run: |
-#              mysql -u root -p$MYSQL_ROOT_PASSWORD -e "SHOW DATABASES;"
-#
-#      - name: Wait for MySQL to be ready
-#        run: |
-#          until nc -z -v -w30 localhost 3306
-#          do
-#          echo "Waiting for MySQL to be ready..."
-#          sleep 5
-#          done
-#
-#      - name: Build with Maven and run Integration Tests
-#        run: cd SpringBootApplication && mvn clean install && mvn -X test
-
-#--------------------------------------------------------------------------------------------------------------------
-
 
       - name: Wait for MySQL to be ready
         run: |

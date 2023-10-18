@@ -18,8 +18,8 @@ echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
 source ~/.bashrc
 
 #Install Maven
-echo "---x---Installing Maven---x---"
-sudo apt install maven -y
+#echo "---x---Installing Maven---x---"
+#sudo apt install maven -y
 
 #After DB installation run this to deploy web application
 #mvn clean install

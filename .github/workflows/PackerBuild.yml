@@ -1,0 +1,69 @@
+name: Packer_Build
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  packer_build:
+    runs-on: ubuntu-latest
+
+    services:
+      mysql:
+        image: mysql:latest
+        env:
+          MYSQL_ROOT_PASSWORD: Ssangramm@12
+          MYSQL_DATABASE: cloud
+        ports:
+          - 3306:3306
+        options:
+          --health-cmd="mysqladmin ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=3
+
+    steps:
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Wait for MySQL to be ready
+        run: |
+          until nc -z -v -w30 localhost 3306
+          do
+            echo "Waiting for MySQL to be ready..."
+            sleep 5
+          done
+
+      - name: Checking out the code
+        uses: actions/checkout@v2
+
+      - name: Build with Maven
+        run: |
+          mvn clean package
+          mkdir stage && cp target/demo-0.0.1-SNAPSHOT.jar stage
+          cp stage/*.jar ami
+          cd ami && ls -all
+          
+      - name: Setup `packer`
+        uses: hashicorp-contrib/setup-packer@v2
+        with:
+          version: 1.6.5
+
+      - name: Run `packer init`
+        run: "packer init ./aws-debian.pkr.hcl"
+
+
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: us-east-1
+
+      - name: Packer-build
+        run: "packer build ./aws-debian.pkr.hcl"
+
+
+
