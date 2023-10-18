@@ -43,7 +43,7 @@ jobs:
 
       - name: Build with Maven
         run: |
-          mvn clean package
+          mvn clean install
           mkdir stage && cp target/webapp-0.0.1-SNAPSHOT.jar stage
           cp stage/*.jar ami
           cd ami && ls -all
