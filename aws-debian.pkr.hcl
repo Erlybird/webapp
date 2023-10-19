@@ -35,10 +35,10 @@ variable "device_name" {
   type    = string
   default = "/dev/xvda"
 }
-variable "volume_size" {
-  type    = integer
-  default = 8
-}
+#variable "volume_size" {
+#  type    = integer
+#  default = 8
+#}
 variable "volume_type" {
   type    = string
   default = "gp2"
@@ -68,7 +68,7 @@ source "amazon-ebs" "my-ami" {
   launch_block_device_mappings {
     delete_on_termination = true
     device_name           = "${var.device_name}"
-    volume_size           = "${var.volume_size}"
+    volume_size           = 8
     volume_type           = "${var.volume_type}"
   }
 }
@@ -82,14 +82,14 @@ build {
     destination = "/tmp/users.csv"
   }
   provisioner "file" {
-    source      = "./target/webapp-0.0.1-SNAPSHOT.jar"
+    source      = "${var.jar_file}"
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
   ##
   provisioner "shell" {
     inline = [
       "sudo mv /tmp/webapp-0.0.1-SNAPSHOT.jar /opt/webapp-0.0.1-SNAPSHOT.jar",
-      "sudo mv /tmp/users.csv /opt/users.csv" ,
+      "sudo mv /tmp/users.csv /opt/users.csv",
 
     ]
   }
