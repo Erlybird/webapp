@@ -1,12 +1,12 @@
 name: Integration Test
 
 on:
- pull_request:
-   branches:
-     [ main ]
- push:
-   branches:
-     [ main ]
+  push:
+    branches:
+      [ main ]
+  pull_request:
+    branches:
+      [ main ]
 
 jobs:
   integration-test:
@@ -18,9 +18,8 @@ jobs:
         env:
           MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
           MYSQL_DATABASE: ${{ secrets.MYSQL_DB_NAME }}
-          ports:
-            - 3306:3306
-
+        ports:
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     steps:
