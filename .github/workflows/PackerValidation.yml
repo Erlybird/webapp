@@ -1,24 +1,24 @@
-#name: Packer Validation
-#
-#on:
-#  pull_request:
-#    branches:
-#      - main
-#
-#jobs:
-#  packer-validation:
-#    runs-on: ubuntu-latest
-#    steps:
-#      - name: Checkout Code
-#        uses: actions/checkout@v2
-#
-#      - name: Setup `packer`
-#        uses: hashicorp-contrib/setup-packer@v2
-#        with:
-#          version: 1.6.5
-#
-#      - name: Run `packer init`
-#        run: packer init ./aws-debian.pkr.hcl
-#
-#      - name: Run `packer validate`
-#        run: packer validate ./aws-debian.pkr.hcl
+name: Packer Validation
+
+on:
+ pull_request:
+   branches:
+     - main
+
+jobs:
+ packer-validation:
+   runs-on: ubuntu-latest
+   steps:
+     - name: Checkout Code
+       uses: actions/checkout@v2
+
+     - name: Setup `packer`
+       uses: hashicorp-contrib/setup-packer@v2
+       with:
+         version: 1.6.5
+
+     - name: Run `packer init`
+       run: packer init ./aws-debian.pkr.hcl
+
+     - name: Run `packer validate`
+       run: packer validate ./aws-debian.pkr.hcl
