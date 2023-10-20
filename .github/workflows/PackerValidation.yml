@@ -3,7 +3,7 @@ name: Packer Validation
 on:
   pull_request:
     branches:
-      - main
+      [ main ]
 
 jobs:
   packer-validation:

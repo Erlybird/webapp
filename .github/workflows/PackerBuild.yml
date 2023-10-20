@@ -97,7 +97,7 @@ jobs:
         run: packer init ./aws-debian.pkr.hcl
 
       - name: Build AMI
-        run: packer build -var "jar_file= ./target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
+        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
 #          cp ./target/*.jar packer
 
 

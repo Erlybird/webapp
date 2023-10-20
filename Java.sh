@@ -17,21 +17,21 @@ echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> ~/.bashrc
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
 source ~/.bashrc
 
-Install Maven
+#Install Maven
 echo "---x---Installing Maven---x---"
 sudo apt install maven -y
 
-#After DB installation run this to deploy web application
-#mvn clean install
-# mvn spring-boot:run
-
-# or you can create a jar file
-#mvn clean package
-#java -jar <webApplication.jar> ( this jar file will be created in the target folder of webapp)
 
 #Install MariaDb
+sudo apt update
+
 echo "sudo apt install mariadb-server"
-sudo apt install mariadb-server
+sudo apt install -y mariadb-server
+
+
+sudo systemctl start mariadb
+echo "sudo systemctl enable mariadb"
+sudo systemctl enable mariadb
 
 echo "sudo mysql_secure_installation"
 sudo mysql_secure_installation <<EOF
@@ -46,11 +46,11 @@ n
 y
 EOF
 
-sudo systemctl start mariadb
-echo "sudo systemctl enable mariadb"
-sudo systemctl enable mariadb
-
-
 
 sudo apt update
 sudo apt upgrade -y
+
+sudo mysql --version
+sudo java --version
+sudo mariadb --version
+sudo mvn --version
