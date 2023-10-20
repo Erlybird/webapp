@@ -30,13 +30,17 @@ public class AssignmentService {
 
     //    public boolean
     public boolean isInvalidPayload(Assignment ass) {
-        String name = ass.getName();
-        int points = ass.getPoints();
-        int attempts = ass.getNum_of_attemps();
-        //validation for Name ,points and attempts
-        if ( name != null && !name.isEmpty() &&
-                points >= 1 && points <= 100 && attempts >= 1 && attempts <= 100) {
-            return false;
+        try {
+            String name = ass.getName();
+            int points = ass.getPoints();
+            int attempts = ass.getNum_of_attemps();
+            //validation for Name ,points and attempts
+            if (name != null && !name.isEmpty() &&
+                    points >= 1 && points <= 100 && attempts >= 1 && attempts <= 100) {
+                return false;
+            }
+        }catch(Exception e){
+            System.out.println("Assignment details are incomplete   " + e.getMessage());
         }
         return true;
     }
