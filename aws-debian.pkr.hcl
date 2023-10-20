@@ -51,8 +51,6 @@ source "amazon-ebs" "my-ami" {
   ami_name        = "csye6225_${formatdate("YYYY_MM_DD_hh_mm_ss", timestamp())}"
   ami_description = "AMI for CSYE 6225"
   ami_users       = ["455958282906", "920403344186"]
-  access_key      = "AKIA5MTCQPM5OTPEY4SJ"
-  secret_key      = "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"
 
   ami_regions = [
     "us-east-1"
