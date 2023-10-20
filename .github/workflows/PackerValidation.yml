@@ -20,5 +20,10 @@ jobs:
       - name: Run `packer init`
         run: packer init ./aws-debian.pkr.hcl
 
-      - name: Run `packer validate`
-        run: packer validate ./aws-debian.pkr.hcl
+      - name: validate template
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: validate
+          arguments: -syntax-only
+          working_directory: webapp
+          target: aws-debian.pkr.hcl

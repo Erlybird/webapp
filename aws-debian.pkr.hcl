@@ -85,7 +85,7 @@ build {
     destination = "/tmp/users.csv"
   }
   provisioner "file" {
-    source      = "${var.jar_file}"
+    source      = "/home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar"
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
   ##
