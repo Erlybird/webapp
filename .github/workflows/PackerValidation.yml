@@ -12,18 +12,20 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v2
 
-      - name: Setup `packer`
-        uses: hashicorp-contrib/setup-packer@v2
-        with:
-          version: 1.6.5
-
-      - name: Run `packer init`
-        run: packer init ./aws-debian.pkr.hcl
+#      - name: Setup `packer`
+#        uses: hashicorp-contrib/setup-packer@v2
+#        with:
+#          version: 1.6.5
+#
+#      - name: Run `packer init`
+#        run: packer init ./aws-debian.pkr.hcl
 
       - name: validate template
         uses: hashicorp/packer-github-actions@master
         with:
           command: validate
           arguments: -syntax-only
-          working_directory: webapp
           target: aws-debian.pkr.hcl
+
+      - name: format check
+        run: packer fmt --check aws-debian.pkr.hcl
