@@ -22,7 +22,7 @@ echo "---x---Installing Maven---x---"
 sudo apt install maven -y
 
 #Install MariaDb
-sudo apt update
+#sudo apt update
 echo "sudo apt install mariadb-server"
 sudo apt install -y mariadb-server
 
