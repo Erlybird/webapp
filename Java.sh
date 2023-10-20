@@ -17,9 +17,9 @@ echo "export JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64/" >> ~/.bashrc
 echo "export PATH=$PATH:$JAVA_HOME/bin" >> ~/.bashrc
 source ~/.bashrc
 
-#Install Maven
-#echo "---x---Installing Maven---x---"
-#sudo apt install maven -y
+Install Maven
+echo "---x---Installing Maven---x---"
+sudo apt install maven -y
 
 #After DB installation run this to deploy web application
 #mvn clean install
@@ -33,18 +33,24 @@ source ~/.bashrc
 echo "sudo apt install mariadb-server"
 sudo apt install mariadb-server
 
+echo "sudo mysql_secure_installation"
+sudo mysql_secure_installation <<EOF
+Ssangramm@12
+n
+y
+Ssangramm@12
+Ssangramm@12
+n
+n
+n
+y
+EOF
 
 sudo systemctl start mariadb
 echo "sudo systemctl enable mariadb"
 sudo systemctl enable mariadb
 
-echo "sudo mysql_secure_installation"
-sudo mysql_secure_installation
 
-sudo mysql <<EOF
-ALTER USER 'root'@'localhost' IDENTIFIED BY 'Ssangramm@12';
-FLUSH PRIVILEGES;
-EOF
 
 sudo apt update
 sudo apt upgrade -y
