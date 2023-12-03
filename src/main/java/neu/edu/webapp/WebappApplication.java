@@ -16,7 +16,7 @@ public class WebappApplication {
     @PostConstruct
     public void init() throws IOException {
         try{
-        registerAccountFromCSV.saveDataFromCSV("opt/users.csv");
+        registerAccountFromCSV.saveDataFromCSV("/opt/users.csv");
         }catch(Exception e){
             System.out.println("unable to load data from CSV");
         }

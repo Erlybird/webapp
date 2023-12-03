@@ -6,8 +6,8 @@ sudo apt-get install unzip
 
 
 #install jdk
-#echo "---x---Adding Java Repository---x---"
-#sudo apt update && sudo apt upgrade -y
+echo "---x---Adding Java Repository---x---"
+sudo apt update && sudo apt upgrade -y
 
 echo "---x---Installing Java 17---x---"
 sudo apt install openjdk-17-jdk -y
