@@ -88,8 +88,9 @@ build {
   ##
   provisioner "shell" {
     inline = [
-      "sudo mv /tmp/webapp-0.0.1-SNAPSHOT.jar /opt/webapp-0.0.1-SNAPSHOT.jar",
-      "sudo mv /tmp/users.csv /opt/users.csv",
+      "sudo mkdir -p /opt/csye6225",
+      "sudo mv /tmp/webapp-0.0.1-SNAPSHOT.jar /opt/csye6225/webapp-0.0.1-SNAPSHOT.jar",
+      "sudo mv /tmp/users.csv /opt/csye6225/users.csv",
 
     ]
   }
