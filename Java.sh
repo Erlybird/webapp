@@ -47,7 +47,7 @@ sudo apt install maven -y
 sudo apt update
 sudo apt upgrade -y
 
-sudo mysql --version
+#sudo mysql --version
 sudo java --version
-sudo mariadb --version
+#sudo mariadb --version
 sudo mvn --version
