@@ -1,5 +1,6 @@
 package neu.edu.webapp.Model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -36,9 +37,11 @@ public class Assignment {
     private Date deadline;
     @CreationTimestamp
     @Column(updatable = false, nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date assignment_created;
     @CreationTimestamp
     @Column(nullable = false)
+    @JsonFormat(pattern = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
     private Date assignment_updated;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "accountId", referencedColumnName = "id")

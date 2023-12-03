@@ -3,6 +3,7 @@ package neu.edu.webapp.Util;
 
 import neu.edu.webapp.Model.Account;
 import neu.edu.webapp.Model.Assignment;
+import neu.edu.webapp.Model.Submission;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
@@ -47,6 +48,7 @@ public class HibernateUtil {
 
                 configuration.addAnnotatedClass(Account.class);
                 configuration.addAnnotatedClass(Assignment.class);
+                configuration.addAnnotatedClass(Submission.class);
 
 
                 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
