@@ -6,13 +6,13 @@ on:
       - main
 
 jobs:
-  packer:
+
+  jar_creation:
     env:
       URL: jdbc:mysql://localhost:3306/cloud?createDatabaseIfNotExist=true
       USER: root
       PASS: Ssangramm@12
 
-  jar_creation:
     runs-on: ubuntu-latest
 
     services:
