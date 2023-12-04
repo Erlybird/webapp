@@ -22,6 +22,9 @@ public class WebappApplication {
         }
     }
     public static void main(String[] args) {
+//        System.out.println("------------------------");
+//        System.out.println(System.getenv("DB") + "   !!!!!!!!came in!!!!!!");
+//        System.out.println("------------------------");
         SpringApplication.run(WebappApplication.class, args);
     }
 
