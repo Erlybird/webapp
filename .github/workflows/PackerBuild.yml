@@ -9,9 +9,9 @@ jobs:
 
   jar_creation:
     env:
-      URL: jdbc:mysql://localhost:3306/cloud?createDatabaseIfNotExist=true
-      USER: root
-      PASS: Ssangramm@12
+      URL: ${{ secrets.URL }}
+      USER: ${{ secrets.USER }}
+      PASS: ${{ secrets.PASS }}
 
     runs-on: ubuntu-latest
 
