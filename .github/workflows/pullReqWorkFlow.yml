@@ -9,14 +9,16 @@ on:
       [ main ]
 
 jobs:
+
+
+  integration-test:
+    runs-on: ubuntu-latest
+
   packer:
     env:
       URL: jdbc:mysql://localhost:3306/cloud?createDatabaseIfNotExist=true
       USER: root
       PASS: Ssangramm@12
-
-  integration-test:
-    runs-on: ubuntu-latest
 
     services:
       mysql:
