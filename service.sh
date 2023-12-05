@@ -4,8 +4,8 @@ echo "|                    Setup webapp.service                     |"
 echo "|                                                             |"
 echo "+-------------------------------------------------------------+"
 echo "cd to /lib/systemd/system"
-cd
-sudo cp -r webapp.service /lib/systemd/system
+
+sudo cp /opt/csye6225/webapp.service /lib/systemd/system
 
 echo "+-------------------------------------------------------------+"
 echo "|                                                             |"

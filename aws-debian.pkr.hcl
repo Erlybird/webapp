@@ -85,12 +85,18 @@ build {
     source      = "/home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar"
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
+
+  provisioner "file"{
+    source = "./webapp.service"
+    destination = "/tmp/webapp.service"
+  }
   ##
   provisioner "shell" {
     inline = [
       "sudo mkdir -p /opt/csye6225",
       "sudo mv /tmp/webapp-0.0.1-SNAPSHOT.jar /opt/csye6225/webapp-0.0.1-SNAPSHOT.jar",
       "sudo mv /tmp/users.csv /opt/csye6225/users.csv",
+      "sudo mv /tmp/webapp.service /opt/csye6225/webapp.service"
 
     ]
   }
@@ -100,6 +106,10 @@ build {
       "CHECKPOINT_DISABLE=1"
     ]
     script = "Java.sh"
+  }
+
+  provisioner "shell"{
+    script = "service.sh"
   }
 
 
