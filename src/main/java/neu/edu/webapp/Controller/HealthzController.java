@@ -1,5 +1,7 @@
 package neu.edu.webapp.Controller;
 
+import com.timgroup.statsd.NonBlockingStatsDClient;
+import com.timgroup.statsd.StatsDClient;
 import neu.edu.webapp.Service.ConnectionCheckService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,11 +17,14 @@ public class HealthzController {
     private ConnectionCheckService connectionCheckService;
 
     Logger logger = LoggerFactory.getLogger(HealthzController.class);
+    private static final StatsDClient statsd = new NonBlockingStatsDClient("metric", "localhost", 8125);
 
     @GetMapping("/healthz")
     public ResponseEntity<Void> checkDatabaseConnection(@RequestParam(name = "inputParam", required = false) String inputParam, @RequestBody(required = false) String inputData) {
         boolean isDbUp = connectionCheckService.isDatabaseConnected();
         logger.warn("Hello World");
+        statsd.incrementCounter("healthz");
+
 //        System.out.println("I'm in IN");
         if (isDbUp) {
             if (inputParam != null && !inputParam.isEmpty()) {

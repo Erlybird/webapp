@@ -40,6 +40,11 @@
             <version>2.20.0</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.timgroup</groupId>
+            <artifactId>java-statsd-client</artifactId>
+            <version>3.0.1</version>
+        </dependency>
 
 
         <dependency>
