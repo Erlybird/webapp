@@ -85,6 +85,10 @@ build {
     source      = "/home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar"
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
+  provisioner "file" {
+    source      = "./logs/csye6225.log"
+    destination = "/tmp/csye6225.log"
+  }
 
   provisioner "file" {
     source      = "./webapp.service"
@@ -92,7 +96,7 @@ build {
   }
   provisioner "file" {
     source      = "cloudwatch/cloudwatch-config.json"
-    destination = "/tmp/"
+    destination = "/tmp/cloudwatch-config.json"
   }
   ##
   provisioner "shell" {
@@ -101,7 +105,8 @@ build {
       "sudo mv /tmp/webapp-0.0.1-SNAPSHOT.jar /opt/csye6225/webapp-0.0.1-SNAPSHOT.jar",
       "sudo mv /tmp/users.csv /opt/csye6225/users.csv",
       "sudo mv /tmp/webapp.service /opt/csye6225/webapp.service",
-      "sudo mv /tmp/cloudwatch-config.json /opt/",
+      "sudo mv /tmp/cloudwatch-config.json /opt/cloudwatch-config.json",
+      "sudo mv /tmp/csye6225.log /opt/csye6225/csye6225.log"
 
     ]
   }
