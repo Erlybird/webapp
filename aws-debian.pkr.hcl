@@ -90,13 +90,18 @@ build {
     source      = "./webapp.service"
     destination = "/tmp/webapp.service"
   }
+  provisioner "file" {
+    source      = "cloudwatch/cloudwatch-config.json"
+    destination = "/tmp/"
+  }
   ##
   provisioner "shell" {
     inline = [
       "sudo mkdir -p /opt/csye6225",
       "sudo mv /tmp/webapp-0.0.1-SNAPSHOT.jar /opt/csye6225/webapp-0.0.1-SNAPSHOT.jar",
       "sudo mv /tmp/users.csv /opt/csye6225/users.csv",
-      "sudo mv /tmp/webapp.service /opt/csye6225/webapp.service"
+      "sudo mv /tmp/webapp.service /opt/csye6225/webapp.service",
+      "sudo mv /tmp/cloudwatch-config.json /opt/",
 
     ]
   }

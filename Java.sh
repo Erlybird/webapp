@@ -47,7 +47,14 @@ sudo apt install maven -y
 sudo apt update
 sudo apt upgrade -y
 
-#sudo mysql --version
 sudo java --version
-#sudo mariadb --version
 sudo mvn --version
+
+
+# Installing Cloud watch for Debian instance
+wget https://s3.amazonaws.com/amazoncloudwatch-agent/debian/amd64/latest/amazon-cloudwatch-agent.deb
+sudo dpkg -i amazon-cloudwatch-agent.deb
+
+#Starting the Cloudwatch
+sudo systemctl enable amazon-cloudwatch-agent
+sudo systemctl start amazon-cloudwatch-agent
