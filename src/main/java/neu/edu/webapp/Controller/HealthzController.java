@@ -1,6 +1,8 @@
 package neu.edu.webapp.Controller;
 
 import neu.edu.webapp.Service.ConnectionCheckService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
@@ -12,9 +14,12 @@ public class HealthzController {
     @Autowired
     private ConnectionCheckService connectionCheckService;
 
+    Logger logger = LoggerFactory.getLogger(HealthzController.class);
+
     @GetMapping("/healthz")
     public ResponseEntity<Void> checkDatabaseConnection(@RequestParam(name = "inputParam", required = false) String inputParam, @RequestBody(required = false) String inputData) {
         boolean isDbUp = connectionCheckService.isDatabaseConnected();
+        logger.warn("Hello World");
 //        System.out.println("I'm in IN");
         if (isDbUp) {
             if (inputParam != null && !inputParam.isEmpty()) {
