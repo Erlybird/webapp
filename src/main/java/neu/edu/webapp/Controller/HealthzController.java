@@ -17,7 +17,7 @@ public class HealthzController {
     private ConnectionCheckService connectionCheckService;
 
     Logger logger = LoggerFactory.getLogger(HealthzController.class);
-    private static final StatsDClient statsd = new NonBlockingStatsDClient("metric", "localhost", 8125);
+    private static final StatsDClient statsd = new NonBlockingStatsDClient("metric", "localhost", 8080 );
 
     @GetMapping("/healthz")
     public ResponseEntity<Void> checkDatabaseConnection(@RequestParam(name = "inputParam", required = false) String inputParam, @RequestBody(required = false) String inputData) {
