@@ -1,9 +1,12 @@
 package neu.edu.webapp.Service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import neu.edu.webapp.Controller.AssignmentController;
 import neu.edu.webapp.DAO.LoginDAO;
 import neu.edu.webapp.DAO.SubmissionDAO;
 import neu.edu.webapp.Model.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import software.amazon.awssdk.services.sns.SnsClient;
@@ -33,6 +36,8 @@ public class SubmissionService {
     SnsClient snsClient;
 
     String topicarn = System.getenv("TopicARN");
+    Logger logger = LoggerFactory.getLogger(SubmissionService.class);
+
 
     public boolean addSubmissionService(Submission submission){
         try{
@@ -75,8 +80,11 @@ public class SubmissionService {
                 .message(message)
                 .build();
         snsClient.publish(publishRequest);
+        logger.info("SNS message has been published");
 
+    }
 
-
+    public long totalSubmissionsMadeOfAssignment( String ass_id){
+        return submissionDAO.totalSubmissionsMadeOfAssignment(ass_id);
     }
 }

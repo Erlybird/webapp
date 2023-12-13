@@ -17,29 +17,34 @@ public class HealthzController {
     private ConnectionCheckService connectionCheckService;
 
     Logger logger = LoggerFactory.getLogger(HealthzController.class);
-    private static final StatsDClient statsd = new NonBlockingStatsDClient("metric", "localhost", 8080 );
+    private final StatsDClient statsd = new NonBlockingStatsDClient("metric", "localhost", 8125 );
 
     @GetMapping("/healthz")
     public ResponseEntity<Void> checkDatabaseConnection(@RequestParam(name = "inputParam", required = false) String inputParam, @RequestBody(required = false) String inputData) {
         boolean isDbUp = connectionCheckService.isDatabaseConnected();
-        logger.warn("Hello World");
-        statsd.incrementCounter("healthz");
+//        logger.warn("Hello World");
+        statsd.incrementCounter("healthz.executed");
 
 //        System.out.println("I'm in IN");
         if (isDbUp) {
             if (inputParam != null && !inputParam.isEmpty()) {
+                logger.error("Bad Request");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).cacheControl(CacheControl.noCache()).build(); // returns 400 Bad Request
             }
             if (inputData != null && !inputData.isEmpty()) {
+                logger.error("Bad Request");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).cacheControl(CacheControl.noCache()).build(); // returns 400 Bad Request
             } else {
+                logger.info("Connected to Db,Healthz Check!");
                 return ResponseEntity.ok().cacheControl(CacheControl.noCache()).build(); // returns 200 OK
             }
 
         } else {
             if (inputData != null && !inputData.isEmpty()) {
+                logger.error("Bad Request");
                 return ResponseEntity.status(HttpStatus.BAD_REQUEST).cacheControl(CacheControl.noCache()).build(); // returns 400 Bad Request
             } else {
+                logger.error("Serivce Unavailable");
                 return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).cacheControl(CacheControl.noCache()).build(); // return 503
             }
         }
@@ -47,10 +52,10 @@ public class HealthzController {
 
     @RequestMapping(value = "/healthz", method = { RequestMethod.POST, RequestMethod.PUT, RequestMethod.PATCH, RequestMethod.DELETE })
     public ResponseEntity<Void> otherMappingRequest(@RequestBody(required = false) String inputData) {
-
+        logger.error("Post method not supported");
         boolean isDbUp = connectionCheckService.isDatabaseConnected();
         if (isDbUp) {
-            System.out.println("into this method1");
+//            System.out.println("into this method1");
             return ResponseEntity.status(HttpStatus.METHOD_NOT_ALLOWED).cacheControl(CacheControl.noCache()) //return 405
                     .build();
 
