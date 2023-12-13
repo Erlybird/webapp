@@ -33,3 +33,7 @@ replay_pid*
 HELP.md
 mvnw
 mvnw.cmd
+
+.mvn
+/target
+
