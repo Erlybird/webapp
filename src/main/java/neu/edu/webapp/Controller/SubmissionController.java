@@ -38,22 +38,34 @@ public class SubmissionController {
 
         if(isLoginSuccess){
 
-            //write the case for if assignment doesn't exist with the id
-            Assignment assignment = assignmentService.getAssignmentFromIdWithoutAccountID(Id_Assignment);
-            Date deadline = assignment.getDeadline();
-//            submission.setAssignment(assignment);
-//            submission.setAssignment_id(assignment.getId());
-            submission.setAssignment_id(Id_Assignment);
-            submission.setSubmission_url(submission_req_url.getSubmission_url());
-            submission.setAccount_email(login.getUserName());
+            if(assignmentService.isAssignmentPresent(Id_Assignment)){
+                Assignment assignment = assignmentService.getAssignmentFromIdWithoutAccountID(Id_Assignment);
+//                Date deadline = assignment.getDeadline();
+                long noOfAttempts = assignment.getNum_of_attemps();
 
-            // if attempts are greater than limit dont' submit the assignment
-//            int result = submissionService.noOfSubmissionsAlreadyMade(login.getUserName(), assignment);
-            if(submissionService.addSubmissionService(submission)){
-                System.out.println("submission added to DB");
-                submissionService.sendSMS(assignment,submission,login);
-                return ResponseEntity.status(HttpStatus.CREATED).cacheControl(CacheControl.noCache()).body(submission);
+                if(!assignmentService.isAssignmentOpen(assignment)){
+                    System.out.println("Assignment is not open, can't submit");
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Assignment is not open to submissions");
+                }
+                if(submissionService.noOfSubmissionsAlreadyMade(login.getUserName(), assignment.getId()) >= noOfAttempts){
+                    System.out.println("Max Submissions reached, can't submit the submission");
+                    return ResponseEntity.status(HttpStatus.FORBIDDEN).body("Max no. of attempts have been crossed, can't make submissions");
+
+                }
+                submission.setAssignment_id(Id_Assignment);
+                submission.setSubmission_url(submission_req_url.getSubmission_url());
+                submission.setAccount_email(login.getUserName());
+                if(submissionService.addSubmissionService(submission)){
+                    System.out.println("submission added to DB");
+                    submissionService.sendSMS(assignment,submission,login);
+                    return ResponseEntity.status(HttpStatus.CREATED).cacheControl(CacheControl.noCache()).body(submission);
+                }
+
+            }else {
+                System.out.println("Assignment is not present");
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).cacheControl(CacheControl.noCache()).body("Assignmnet is not present");
             }
+
 
         }else{
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).cacheControl(CacheControl.noCache()).build();

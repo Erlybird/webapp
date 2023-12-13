@@ -44,11 +44,11 @@ public class SubmissionService {
         return true;
     }
 //
-//    public int noOfSubmissionsAlreadyMade(String username, Assignment ass_id){
-//
-//           int result = submissionDAO.noOfSubmissionsAlreadyMade(username,ass_id);
-//        return result;
-//    }
+    public long noOfSubmissionsAlreadyMade(String username, String ass_id){
+
+           long result = submissionDAO.noOfSubmissionsAlreadyMade(username,ass_id);
+        return result;
+    }
 
     public void sendSMS(Assignment assignment,Submission submission, Login login){
         SNSData snsData = new SNSData();

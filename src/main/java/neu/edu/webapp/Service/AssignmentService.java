@@ -7,7 +7,9 @@ import neu.edu.webapp.Model.Assignment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.*;
 
 @Component
 public class AssignmentService {
@@ -43,6 +45,17 @@ public class AssignmentService {
             System.out.println("Assignment details are incomplete   " + e.getMessage());
         }
         return true;
+    }
+
+    public boolean isAssignmentOpen(Assignment assignment){
+//        LocalDateTime now = LocalDateTime.now();
+        Date now = new Date();
+        return now.before(assignment.getDeadline());
+//        return now.isBefore((LocalDateTime)assignment.getDeadline());
+    }
+
+    public boolean isAssignmentPresent(String assignment_Id){
+        return assignmentDAO.isAssignmentPresent(assignment_Id);
     }
 
     public List<Assignment> getAllAssignmentsById(Account acc) {

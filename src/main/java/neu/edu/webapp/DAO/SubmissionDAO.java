@@ -46,4 +46,23 @@ public class SubmissionDAO extends DAO{
 //  }
 //  return result;
 // }
+
+ public long noOfSubmissionsAlreadyMade(String username, String ass_id){
+
+   long result =0;
+   try{
+    begin();
+    Query query = getSession().createQuery("SELECT COUNT(*) FROM Submission where assignment_id=:assignmentID AND account_email=:emailId ");
+    query.setParameter("assignmentID", ass_id);
+    query.setParameter("emailId", username);
+    result = (Long) query.uniqueResult();
+    commit();
+
+   }catch(Exception e){
+    System.out.println(e.getMessage());
+   }finally{
+    close();
+   }
+   return result;
+ }
 }

@@ -161,6 +161,27 @@ public class AssignmentDAO extends DAO {
         }
         return assignment1;
     }
+
+
+    public boolean isAssignmentPresent(String assignmentId){
+        long count =0;
+        try{
+            begin();
+            Query query = getSession().createQuery("Select count(*) from Assignment  where id=:assignId");
+            query.setParameter("assignId",assignmentId);
+            count = (Long) query.uniqueResult();
+            commit();
+//            System.out.println("Inside loop :  " + count );
+        }catch(Exception e){
+            System.out.println("Exception in AssDAO in isAssignPresent " + e.getMessage());
+        }finally{
+            close();
+        }
+//        System.out.println("Outside loop :  " + count );
+
+        if(count!=0) return true;
+        return false;
+    }
 }
 
 
