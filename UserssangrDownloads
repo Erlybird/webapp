@@ -1,0 +1,22 @@
+2023-12-06T18:56:54.225-05:00  INFO 59788 --- [main] neu.edu.webapp.WebappApplicationTests    : Starting WebappApplicationTests using Java 17.0.4.1 with PID 59788 (started by sangr in C:\Users\sangr\OneDrive - Northeastern University\Desktop\11-3-2023\webapp)
+2023-12-06T18:56:54.227-05:00  INFO 59788 --- [main] neu.edu.webapp.WebappApplicationTests    : No active profile set, falling back to 1 default profile: "default"
+2023-12-06T18:56:55.584-05:00  INFO 59788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 0 (http)
+2023-12-06T18:56:55.595-05:00  INFO 59788 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-12-06T18:56:55.596-05:00  INFO 59788 --- [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.13]
+2023-12-06T18:56:55.734-05:00  INFO 59788 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-12-06T18:56:55.735-05:00  INFO 59788 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1481 ms
+2023-12-06T18:56:55.871-05:00  INFO 59788 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.33.Final
+2023-12-06T18:56:56.176-05:00  INFO 59788 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-12-06T18:56:56.337-05:00  WARN 59788 --- [main] org.hibernate.orm.connections.pooling    : HHH10001002: Using Hibernate built-in connection pool (not for production use!)
+2023-12-06T18:56:56.349-05:00  INFO 59788 --- [main] org.hibernate.orm.connections.pooling    : HHH10001005: using driver [com.mysql.cj.jdbc.Driver] at URL [jdbc:mysql://localhost:3306/cloud?createDatabaseIfNotExist=true]
+2023-12-06T18:56:56.349-05:00  INFO 59788 --- [main] org.hibernate.orm.connections.pooling    : HHH10001001: Connection properties: {password=****, user=root}
+2023-12-06T18:56:56.350-05:00  INFO 59788 --- [main] org.hibernate.orm.connections.pooling    : HHH10001003: Autocommit mode: false
+2023-12-06T18:56:56.353-05:00  INFO 59788 --- [main] .c.i.DriverManagerConnectionProviderImpl : HHH000115: Hibernate connection pool size: 20 (min=1)
+2023-12-06T18:56:56.860-05:00  INFO 59788 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL8Dialect
+2023-12-06T18:56:57.605-05:00  INFO 59788 --- [main] org.hibernate.orm.connections.access     : HHH10001501: Connection obtained from JdbcConnectionAccess [org.hibernate.engine.jdbc.env.internal.JdbcEnvironmentInitiator$ConnectionProviderJdbcConnectionAccess@460b77d6] for (non-JTA) DDL execution was not in auto-commit mode; the Connection 'local transaction' will be committed and the Connection will be set into auto-commit mode.
+2023-12-06T18:56:58.598-05:00  INFO 59788 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 55634 (http) with context path ''
+2023-12-06T18:56:58.606-05:00  INFO 59788 --- [main] neu.edu.webapp.WebappApplicationTests    : Started WebappApplicationTests in 4.737 seconds (process running for 5.92)
+2023-12-06T18:56:59.284-05:00  INFO 59788 --- [http-nio-auto-1-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-12-06T18:56:59.284-05:00  INFO 59788 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-12-06T18:56:59.285-05:00  INFO 59788 --- [http-nio-auto-1-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2023-12-06T18:56:59.345-05:00  WARN 59788 --- [http-nio-auto-1-exec-1] n.e.webapp.Controller.HealthzController  : Hello World
