@@ -20,10 +20,11 @@ public class Submission {
     @Column(name = "id", updatable = false, nullable = false, insertable = false)
     private String id;
 
-    @ManyToOne
-    @JoinColumn(name = "assignment_Id", referencedColumnName = "id", nullable = false)
+//    @ManyToOne
+//    @JoinColumn(name = "assignment_Id", referencedColumnName = "id", nullable = false)
 //    @JsonIgnore
-    private Assignment assignment;
+    @Column(name="assignment_id", nullable = false)
+    private String assignment_id;
 
 //    @Transient
 //    private String assignment_id;
@@ -55,9 +56,9 @@ public class Submission {
         this.id = id;
     }
 
-    public Assignment getAssignment() {
-        return assignment;
-    }
+//    public Assignment getAssignment() {
+//        return assignment;
+//    }
 
 //    public String getAssignment_id() {
 //        return assignment_id;
@@ -67,9 +68,9 @@ public class Submission {
 //        this.assignment_id = assignment_id;
 //    }
 
-    public void setAssignment(Assignment assignment) {
-        this.assignment = assignment;
-    }
+//    public void setAssignment(Assignment assignment) {
+//        this.assignment = assignment;
+//    }
 
     public String getSubmission_url() {
         return submission_url;
@@ -109,4 +110,13 @@ public class Submission {
 //    public void setSubmission_Date(Date submission_Date) {
 //        this.submission_Date = submission_Date;
 //    }
+
+
+    public String getAssignment_id() {
+        return assignment_id;
+    }
+
+    public void setAssignment_id(String assignment_id) {
+        this.assignment_id = assignment_id;
+    }
 }

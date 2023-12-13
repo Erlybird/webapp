@@ -12,6 +12,7 @@ jobs:
       URL: ${{ secrets.URL }}
       USER: ${{ secrets.USER }}
       PASS: ${{ secrets.PASS }}
+      TopicARN: ${{ secrets.TopicARN }}
 
     runs-on: ubuntu-latest
 

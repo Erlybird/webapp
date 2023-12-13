@@ -13,6 +13,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Date;
+
 @RestController
 public class SubmissionController {
 
@@ -38,9 +40,10 @@ public class SubmissionController {
 
             //write the case for if assignment doesn't exist with the id
             Assignment assignment = assignmentService.getAssignmentFromIdWithoutAccountID(Id_Assignment);
-
-            submission.setAssignment(assignment);
+            Date deadline = assignment.getDeadline();
+//            submission.setAssignment(assignment);
 //            submission.setAssignment_id(assignment.getId());
+            submission.setAssignment_id(Id_Assignment);
             submission.setSubmission_url(submission_req_url.getSubmission_url());
             submission.setAccount_email(login.getUserName());
 
@@ -48,6 +51,7 @@ public class SubmissionController {
 //            int result = submissionService.noOfSubmissionsAlreadyMade(login.getUserName(), assignment);
             if(submissionService.addSubmissionService(submission)){
                 System.out.println("submission added to DB");
+                submissionService.sendSMS(assignment,submission,login);
                 return ResponseEntity.status(HttpStatus.CREATED).cacheControl(CacheControl.noCache()).body(submission);
             }
 
