@@ -82,7 +82,7 @@ build {
     destination = "/tmp/users.csv"
   }
   provisioner "file" {
-    source      = "/home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar"
+    source      = "../home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar"
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
   provisioner "file" {
@@ -115,11 +115,11 @@ build {
       "DEBIAN_FRONTEND=noninteractive",
       "CHECKPOINT_DISABLE=1"
     ]
-    script = "Java.sh"
+    script = "../Java.sh"
   }
 
   provisioner "shell" {
-    script = "service.sh"
+    script = "../service.sh"
   }
 
 
