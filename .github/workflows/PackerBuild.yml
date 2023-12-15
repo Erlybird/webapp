@@ -85,7 +85,7 @@ jobs:
       # ... (previous steps remain unchanged)
 
       - name: Build AMI
-        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
+        run: packer build -manifest=./manifest.json -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
 
       - name: Checking manifest file present or not
         run: cd ${{ github.workspace }} && ls -al
