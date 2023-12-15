@@ -1,11 +1,11 @@
-packer {
-  required_plugins {
-    amazon = {
-      source  = "github.com/hashicorp/amazon"
-      version = ">= 1.2.8"
-    }
-  }
-}
+#packer {
+#  required_plugins {
+#    amazon = {
+#      source  = "github.com/hashicorp/amazon"
+#      version = ">= 1.2.8"
+#    }
+#  }
+#}
 
 
 variable "aws_region" {
