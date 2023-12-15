@@ -74,9 +74,9 @@ jobs:
 #
 #      - name: Packer-build
 #        run: packer build ./aws-debian.pkr.hcl
-      - name: Run Packer init
-        id: init
-        run: packer init ./aws-debian.pkr.hcl
+#      - name: Run Packer init
+#        id: init
+#        run: packer init ./aws-debian.pkr.hcl
 
 #      - name: Build AMI
 #        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
@@ -84,21 +84,28 @@ jobs:
 
       # ... (previous steps remain unchanged)
 
-      - name: Build AMI
-        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
+      - name: Packer AMI Build
+        uses: hashicorp/packer-github-actions@master
+        with:
+          command: build
+          working_directory: packer
+          target: aws-debian.pkr.hcl
+
+#      - name: Build AMI
+#        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
 
       - name: Display structure of downloaded files
-        run: ls -la && ls -la ./
+        run: ls -la && ls -la ./packer
 
       - name: Installing jq command
         run: sudo apt install -y jq
 
       - name: Display manifest file
-        run: cat ./manifest.json
+        run: cat ./packer/manifest.json
 
       - name: Extract AMI ID
         run: |
-          AMI_ID=$(jq -r '.builds[0].artifact_id' manifest.json | cut -d ":" -f2)
+          AMI_ID=$(jq -r '.builds[0].artifact_id' ./packer/manifest.json | cut -d ":" -f2)
           echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
 
 
