@@ -1,11 +1,11 @@
-#packer {
-#  required_plugins {
-#    amazon = {
-#      source  = "github.com/hashicorp/amazon"
-#      version = ">= 1.2.8"
-#    }
-#  }
-#}
+packer {
+  required_plugins {
+    amazon = {
+      source  = "github.com/hashicorp/amazon"
+      version = ">= 1.0.0"
+    }
+  }
+}
 
 
 variable "aws_region" {
@@ -78,32 +78,24 @@ build {
   sources = ["source.amazon-ebs.my-ami"]
 
   provisioner "file" {
-    source      = "../opt/users.csv"
+    source      = "./opt/users.csv"
     destination = "/tmp/users.csv"
   }
-
-  provisioner "shell" {
-    inline = [
-      "sudo pwd",
-
-    ]
-  }
-
   provisioner "file" {
-    source      = "./target/webapp-0.0.1-SNAPSHOT.jar"
+    source      = "/home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar"
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
   provisioner "file" {
-    source      = "../logs/csye6225.log"
+    source      = "./logs/csye6225.log"
     destination = "/tmp/csye6225.log"
   }
 
   provisioner "file" {
-    source      = "../webapp.service"
+    source      = "./webapp.service"
     destination = "/tmp/webapp.service"
   }
   provisioner "file" {
-    source      = "../cloudwatch/cloudwatch-config.json"
+    source      = "cloudwatch/cloudwatch-config.json"
     destination = "/tmp/cloudwatch-config.json"
   }
   ##
@@ -123,11 +115,11 @@ build {
       "DEBIAN_FRONTEND=noninteractive",
       "CHECKPOINT_DISABLE=1"
     ]
-    script = "../Java.sh"
+    script = "Java.sh"
   }
 
   provisioner "shell" {
-    script = "../service.sh"
+    script = "service.sh"
   }
 
 
