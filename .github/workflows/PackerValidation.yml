@@ -25,8 +25,7 @@ jobs:
         with:
           command: validate
           arguments: -syntax-only
-          working_directory: packer
           target: aws-debian.pkr.hcl
 
       - name: format check
-        run: packer fmt --check ./packer/aws-debian.pkr.hcl
+        run: packer fmt --check aws-debian.pkr.hcl
