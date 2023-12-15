@@ -59,11 +59,15 @@ jobs:
 #        with:
 #          version: 1.6.5
 #
-#      - name: Setup Packer
-#        uses: hashicorp/setup-packer@main
-#        id: setup
-#        with:
-#          version: "latest"
+      - name: Setup Packer
+        uses: hashicorp/setup-packer@main
+        id: setup
+        with:
+          version: "latest"
+
+      - name: downloading all packer required plugins
+        run: packer init ./packer/aws-debian.pkr.hcl
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
