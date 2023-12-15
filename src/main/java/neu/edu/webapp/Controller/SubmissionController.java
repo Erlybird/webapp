@@ -39,7 +39,7 @@ public class SubmissionController {
 
 
 //    @PostMapping(value = "/v1/assignments/{id}/submission")
-    @PostMapping(value = "/v2/assignments/{id}/submission")
+    @PostMapping(value = "/v3/assignments/{id}/submission")
     public ResponseEntity<?> addSubmission(@RequestHeader("Authorization") String authHeader,
                                            @RequestBody Submission_Request submission_req_url,
                                            @PathVariable(value = "id") String Id_Assignment){
@@ -95,7 +95,7 @@ public class SubmissionController {
     }
 
 //    @GetMapping(value = "/v1/assignments/{id}/submission")
-    @GetMapping(value = "/v2/assignments/{id}/submission")
+    @GetMapping(value = "/v3/assignments/{id}/submission")
     public ResponseEntity<?> getSubmission(@RequestHeader("Authorization") String authHeader,
                                            @RequestBody Submission_Request submission_req_url,
                                            @PathVariable(value = "id") String Id_Assignment) {
@@ -105,7 +105,7 @@ public class SubmissionController {
     }
 
 //    @PutMapping(value = "/v1/assignments/{id}/submission")
-    @PutMapping(value = "/v2/assignments/{id}/submission")
+    @PutMapping(value = "/v3/assignments/{id}/submission")
     public ResponseEntity<?> putSubmission(@RequestHeader("Authorization") String authHeader,
                                            @RequestBody Submission_Request submission_req_url,
                                            @PathVariable(value = "id") String Id_Assignment) {
@@ -116,7 +116,7 @@ public class SubmissionController {
     }
 
 //    @DeleteMapping(value = "/v1/assignments/{id}/submission")
-    @DeleteMapping(value = "/v2/assignments/{id}/submission")
+    @DeleteMapping(value = "/v3/assignments/{id}/submission")
     public ResponseEntity<?> delSubmission(@RequestHeader("Authorization") String authHeader,
                                            @RequestBody Submission_Request submission_req_url,
                                            @PathVariable(value = "id") String Id_Assignment) {

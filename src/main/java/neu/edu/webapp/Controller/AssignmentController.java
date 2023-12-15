@@ -41,7 +41,7 @@ public class AssignmentController {
     private final StatsDClient statsd = new NonBlockingStatsDClient("metric", "localhost", 8125 );
 
 //    @PostMapping(value = "/v1/assignments")
-    @PostMapping(value = "/v2/assignments")
+    @PostMapping(value = "/v3/assignments")
     public ResponseEntity<?> addAssignments(@RequestHeader("Authorization") String authHeader, @RequestBody Assignment ass) {
         statsd.incrementCounter("PostAssignments.executed");
         Login login = loginService.getLoginDetails(authHeader);
@@ -77,7 +77,7 @@ public class AssignmentController {
     }
 
 //    @GetMapping(value = "v1/assignments")
-    @GetMapping(value = "v2/assignments")
+    @GetMapping(value = "v3/assignments")
     public ResponseEntity<List<Assignment>> getAllAssignmentsbyId(@RequestHeader("Authorization") String authHeader) {
         statsd.incrementCounter("GetAllAssignments.executed");
 
@@ -111,7 +111,7 @@ public class AssignmentController {
     }
 
 //    @GetMapping(value = "v1/assignments/{id}")
-    @GetMapping(value = "v2/assignments/{id}")
+    @GetMapping(value = "v3/assignments/{id}")
     public ResponseEntity<Assignment> getAssignmentById(@RequestHeader("Authorization") String authHeader, @PathVariable(value = "id") String assignmentId) {
         statsd.incrementCounter("GetAssignment.executed");
 
@@ -156,7 +156,7 @@ public class AssignmentController {
     }
 
 //    @DeleteMapping(value = "v1/assignments/{id}")
-    @DeleteMapping(value = "v2/assignments/{id}")
+    @DeleteMapping(value = "v3/assignments/{id}")
     public ResponseEntity<Void> deleteAssignmentById(@RequestHeader("Authorization") String authHeader, @PathVariable(value = "id") String assignmentId) {
         statsd.incrementCounter("DeleteAssignment.executed");
 
@@ -204,7 +204,7 @@ public class AssignmentController {
 
 
 //    @PutMapping(value = "/v1/assignments/{id}")
-    @PutMapping(value = "/v2/assignments/{id}")
+    @PutMapping(value = "/v3/assignments/{id}")
     public ResponseEntity<?> updateAssignmentByID(@RequestHeader("Authorization") String authHeader, @RequestBody Assignment assignment,
                                                      @PathVariable(value = "id") String assignmentId) {
         statsd.incrementCounter("UpdateAssignment.executed");
