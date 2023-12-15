@@ -82,18 +82,29 @@ jobs:
 #        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
 #          cp ./target/*.jar packer
 
-
-
-
       # ... (previous steps remain unchanged)
 
       - name: Build AMI
-        id: build
+        run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
+
+
+      - name: Display manifest file
+        run: cat ./manifest.json
+
+      - name: Extract AMI ID
         run: |
-          OUTPUT=$(packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl)
-          echo "$OUTPUT"
-          AMI_ID=$(echo "$OUTPUT" | grep -oP 'AMI: \K\w+')
+          AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
           echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
+
+
+#      - name: Build AMI
+#        id: build
+#        run: |
+#          OUTPUT=$(packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl)
+#          echo "$OUTPUT"
+#          AMI_ID=$(echo "$OUTPUT" | grep -oP 'AMI: \K\w+')
+#          echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
+
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
