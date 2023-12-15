@@ -78,7 +78,7 @@ build {
   sources = ["source.amazon-ebs.my-ami"]
 
   provisioner "file" {
-    source      = "./opt/users.csv"
+    source      = "../opt/users.csv"
     destination = "/tmp/users.csv"
   }
   provisioner "file" {
@@ -86,16 +86,16 @@ build {
     destination = "/tmp/webapp-0.0.1-SNAPSHOT.jar"
   }
   provisioner "file" {
-    source      = "./logs/csye6225.log"
+    source      = "../logs/csye6225.log"
     destination = "/tmp/csye6225.log"
   }
 
   provisioner "file" {
-    source      = "./webapp.service"
+    source      = "../webapp.service"
     destination = "/tmp/webapp.service"
   }
   provisioner "file" {
-    source      = "cloudwatch/cloudwatch-config.json"
+    source      = "../cloudwatch/cloudwatch-config.json"
     destination = "/tmp/cloudwatch-config.json"
   }
   ##
