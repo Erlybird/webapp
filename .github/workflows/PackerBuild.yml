@@ -87,45 +87,45 @@ jobs:
       - name: Build AMI
         run: packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl
 
-
-      - name: Display manifest file
-        run: cat ./manifest.json
-
-      - name: Extract AMI ID
-        run: |
-          AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
-          echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
-      
-
-      #      - name: Build AMI
-      #        id: build
-      #        run: |
-      #          OUTPUT=$(packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl)
-      #          echo "$OUTPUT"
-      #          AMI_ID=$(echo "$OUTPUT" | grep -oP 'AMI: \K\w+')
-      #          echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
-
-
-      - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
-        with:
-          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEMO }}
-          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEMO }}
-          aws-region: ${{ vars.AWS_REGION }}
-
-      - name: Update Launch Template
-        run: |
-          aws ec2 create-launch-template-version --launch-template-name LaunchTemplate_EC2 \
-          --source-version '$Latest' \
-          --launch-template-data '{"ImageId":"${{ env.AMI_ID }}"}'
-
-      - name: Refresh Auto Scaling Group
-        run: |
-          aws autoscaling start-instance-refresh \
-          --auto-scaling-group-name asg_launch_config \
-          --strategy Rolling \
-          --desired-configuration '{"LaunchTemplate": {"LaunchTemplateName":"LaunchTemplate_EC2", "Version":"$Latest"}}'
-
-# ... (any additional steps)
-
-
+#
+#      - name: Display manifest file
+#        run: cat ./manifest.json
+#
+#      - name: Extract AMI ID
+#        run: |
+#          AMI_ID=$(jq -r '.builds[-1].artifact_id' manifest.json | cut -d ":" -f2)
+#          echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
+#
+#
+#      #      - name: Build AMI
+#      #        id: build
+#      #        run: |
+#      #          OUTPUT=$(packer build -var "jar_file= /home/runner/work/webapp/webapp/target/webapp-0.0.1-SNAPSHOT.jar" ./aws-debian.pkr.hcl)
+#      #          echo "$OUTPUT"
+#      #          AMI_ID=$(echo "$OUTPUT" | grep -oP 'AMI: \K\w+')
+#      #          echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
+#
+#
+#      - name: Configure AWS Credentials
+#        uses: aws-actions/configure-aws-credentials@v1
+#        with:
+#          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID_DEMO }}
+#          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY_DEMO }}
+#          aws-region: ${{ vars.AWS_REGION }}
+#
+#      - name: Update Launch Template
+#        run: |
+#          aws ec2 create-launch-template-version --launch-template-name LaunchTemplate_EC2 \
+#          --source-version '$Latest' \
+#          --launch-template-data '{"ImageId":"${{ env.AMI_ID }}"}'
+#
+#      - name: Refresh Auto Scaling Group
+#        run: |
+#          aws autoscaling start-instance-refresh \
+#          --auto-scaling-group-name asg_launch_config \
+#          --strategy Rolling \
+#          --desired-configuration '{"LaunchTemplate": {"LaunchTemplateName":"LaunchTemplate_EC2", "Version":"$Latest"}}'
+#
+## ... (any additional steps)
+#
+#
