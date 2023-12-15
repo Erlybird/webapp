@@ -2,7 +2,7 @@ packer {
   required_plugins {
     amazon = {
       source  = "github.com/hashicorp/amazon"
-      version = ">= 1.0.0"
+      version = ">= 1.2.8"
     }
   }
 }
@@ -120,6 +120,13 @@ build {
 
   provisioner "shell" {
     script = "service.sh"
+  }
+
+  post-processors {
+    post-processor "manifest" {
+      output     = "manifest.json"
+      strip_path = true
+    }
   }
 
 
