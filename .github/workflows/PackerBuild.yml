@@ -87,6 +87,8 @@ jobs:
 #          cp ./target/*.jar packer
 
       # ... (previous steps remain unchanged)
+      - name: Finding out the present working directory
+        run: sudo pwd
 
       - name: Packer AMI Build
         uses: hashicorp/packer-github-actions@master
